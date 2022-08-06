@@ -1,0 +1,27 @@
+version: "3"
+services:
+  express:
+    build:
+      context: .
+      dockerfile: ./docker/express/Dockerfile
+    depends_on:
+      - postgresql
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/usr/src/app
+    command: sh -c "DEBUG=app:* yarn run start"
+
+  postgresql:
+    build:
+      context: .
+      dockerfile: ./docker/postgresql/Dockerfile
+    ports:
+      - 5432:5432
+    volumes:
+      - ./var/postgresql-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      APP_DATABASE_NAME: ${APP_DATABASE_NAME}
+      APP_DATABASE_USER: ${APP_DATABASE_USER}
+      APP_DATABASE_PASSWORD: ${APP_DATABASE_PASSWORD}
