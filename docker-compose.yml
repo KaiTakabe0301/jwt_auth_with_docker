@@ -25,3 +25,12 @@ services:
       APP_DATABASE_NAME: ${APP_DATABASE_NAME}
       APP_DATABASE_USER: ${APP_DATABASE_USER}
       APP_DATABASE_PASSWORD: ${APP_DATABASE_PASSWORD}
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    depends_on:
+      - express
+    ports:
+      - 80:80
