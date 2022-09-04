@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const pool = require("../db/pool");
+const pool = require("../../db/pool");
 
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
